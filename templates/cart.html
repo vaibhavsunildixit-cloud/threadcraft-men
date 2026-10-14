@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if placed %}<p class="ok">Order placed successfully. Thank you for shopping with ThreadCraft!</p>{% endif %}
+{% if lines %}
+<table>
+  <tr><th>Item</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+  {% for l in lines %}
+  <tr><td>{{ l.emoji }} {{ l.name }}</td><td>{{ l.qty }}</td><td>₹{{ "{:,}".format(l.subtotal) }}</td>
+  <td><form method="post" action="{{ url_for('remove', pid=l.id) }}"><button class="link">Remove</button></form></td></tr>
+  {% endfor %}
+  <tr class="total"><td colspan="2">Total</td><td colspan="2">₹{{ "{:,}".format(total) }}</td></tr>
+</table>
+<form method="post" action="{{ url_for('checkout') }}"><button>Place order</button></form>
+{% elif not placed %}<p>Your cart is empty.</p>{% endif %}
+{% endblock %}

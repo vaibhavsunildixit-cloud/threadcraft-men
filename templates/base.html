@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThreadCraft Men</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body>
+<header>
+  <a class="logo" href="{{ url_for('home') }}">THREADCRAFT<span>MEN</span></a>
+  <nav>
+    <a href="{{ url_for('home') }}">All</a>
+    {% for c in categories %}<a href="{{ url_for('home', category=c) }}">{{ c }}</a>{% endfor %}
+    <a class="cart" href="{{ url_for('cart') }}">Cart ({{ cart_count }})</a>
+  </nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Served by pod <code>{{ pod_name }}</code></footer>
+</body></html>

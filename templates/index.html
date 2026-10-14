@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero"><h1>Dress sharp. Ship fast.</h1><p>New season essentials for men.</p></section>
+<h2>{{ active or "All Products" }}</h2>
+<div class="grid">
+{% for p in products %}
+  <div class="card">
+    <div class="img">{{ p.emoji }}</div>
+    <h3>{{ p.name }}</h3>
+    <p class="cat">{{ p.category }}</p>
+    <p class="price">₹{{ "{:,}".format(p.price) }}</p>
+    <form method="post" action="{{ url_for('add', pid=p.id) }}"><button>Add to cart</button></form>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
